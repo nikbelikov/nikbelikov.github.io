@@ -57,25 +57,75 @@ ul {
   display: flex;
 }
 
-ul > li {
+ul>li {
   margin: 0 4px;
 }
 
-ul > li > a {
+ul>li>a {
   text-decoration: none;
   color: black;
   padding: 10px;
 }
 
-ul > li > a:hover svg {
+ul>li>a:hover svg {
   transform: scale(1.2);
   opacity: 1;
 }
 
-ul > li > a > svg {
+ul>li>a>svg {
   width: 30px;
   height: 30px;
   fill: black;
   transition: transform .3s, opacity .3s;
   opacity: 0.1;
+}
+
+.about {
+  display: grid;
+  place-items: center;
+  width: min(90vw, 800px);
+  margin-inline: auto;
+  padding-block: 16vh 12vh;
+  font-size: clamp(16px, 1.6vw + 12px, 20px);
+  line-height: 1.75;
+  color: #222;
+}
+
+@supports (animation-timeline: view()) {
+  .about {
+    opacity: 0;
+    transform: translateY(16px);
+    animation: about-reveal linear both;
+    animation-timeline: view();
+    animation-range: entry 0% entry 60%;
+  }
+}
+
+@keyframes about-reveal {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.about p {
+  text-wrap: pretty;
+}
+
+.about p+p {
+  margin-top: 1.4em;
+}
+
+@media (max-width: 600px) {
+  .about {
+    padding-block: 10vh 8vh;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .about {
+    opacity: 1;
+    transform: none;
+    animation: none;
+  }
 }
